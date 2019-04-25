@@ -58,7 +58,6 @@ class S3Sync extends DefaultTask {
     
     void from(sourcePath) {
         originalSourcePath = sourcePath
-        sourceDir = project.file(sourcePath)
     }
 
     void into(destinationPath) {
@@ -92,6 +91,7 @@ class S3Sync extends DefaultTask {
             if (useMD5) {
                 new File(jets3tProperties.getStringProperty("filecomparer.md5-files-root-dir", "")).mkdirs();
             }
+            sourceDir = project.file(sourcePath)
             def sources = sourceDir.listFiles()
             if (sources) {
                 client.run(destination, sources,
